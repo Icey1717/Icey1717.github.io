@@ -1,1 +1,93 @@
-Hello World
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Potluck Planner</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore.js"></script>
+    <script>
+    // Your Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyD_aIUJup0_3t51O4S3jEMX3rxSGOW2oOA",
+      authDomain: "birthday-boy-e1605.firebaseapp.com",
+      projectId: "birthday-boy-e1605",
+      storageBucket: "birthday-boy-e1605.firebasestorage.app",
+      messagingSenderId: "32454068318",
+      appId: "1:32454068318:web:a849d3e6175719c348cccf"
+    };
+
+    // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    // Check password and authenticate user
+    function checkPassword() {
+      const inputPassword = document.getElementById("password").value;
+
+      auth.signInWithEmailAndPassword("party@guest.com", inputPassword)
+        .then(() => {
+          // Password correct, show main content
+          document.getElementById("login").style.display = "none";
+          document.getElementById("content").style.display = "block";
+          loadPotluckData();
+        })
+        .catch(() => {
+          // Password incorrect, show error message
+          document.getElementById("error").textContent = "Incorrect password!";
+        });
+    }
+
+    // Fetch and display potluck data
+    async function loadPotluckData() {
+      const dishList = document.getElementById("dish-list");
+      dishList.innerHTML = ""; // Clear the list
+
+      const querySnapshot = await db.collection("dishes").get();
+      querySnapshot.forEach((doc) => {
+        const dish = doc.data();
+        const li = document.createElement("li");
+        li.textContent = `${dish.name} - ${dish.dish}`;
+        dishList.appendChild(li);
+      });
+    }
+
+    // Add a new dish to Firestore
+    async function addDish() {
+      const name = document.getElementById("name").value;
+      const dish = document.getElementById("dish").value;
+
+      if (name && dish) {
+        await db.collection("dishes").add({ name, dish });
+        document.getElementById("name").value = "";
+        document.getElementById("dish").value = "";
+        loadPotluckData();
+      } else {
+        alert("Please fill out both fields.");
+      }
+    }
+  </script>
+</head>
+<body>
+  <div id="login">
+    <h2>Enter Password</h2>
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="checkPassword()">Submit</button>
+    <p id="error" style="color: red;"></p>
+  </div>
+
+  <div id="content" style="display: none;">
+    <h2>Potluck Planner</h2>
+    <ul id="dish-list"></ul>
+
+    <h3>Add Your Dish</h3>
+    <input type="text" id="name" placeholder="Your Name">
+    <input type="text" id="dish" placeholder="Dish Name">
+    <button onclick="addDish()">Add Dish</button>
+  </div>
+</body>
+</html>
