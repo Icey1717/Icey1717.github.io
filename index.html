@@ -108,23 +108,23 @@
   </script>
 </head>
 <body>
-    <div id="login">
-        <h2>Enter Password</h2>
-        <input type="password" id="password" placeholder="Password">
-        <button onclick="checkPassword()">Submit</button>
-        <p id="error" style="color: red;"></p>
+  <div id="login">
+    <h2>Enter Password</h2>
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="checkPassword()">Submit</button>
+    <p id="error" style="color: red;"></p>
+  </div>
+
+  <div id="content" style="display: none;">
+    <h2>Potluck Planner</h2>
+    <ul id="dish-list"></ul>
+
+    <h3>Add Your Dish</h3>
+    <div id="dish-entry">
+        <input type="text" id="name" placeholder="Your Name">
+        <input type="text" id="dish" placeholder="Dish Name">
+        <button onclick="addDish()">Add Dish</button>
     </div>
-    
-    <div id="content" style="display: none;">
-        <h2>Potluck Planner</h2>
-        <ul id="dish-list"></ul>
-    
-        <h3>Add Your Dish</h3>
-        <div id="dish-entry">
-            <input type="text" id="name" placeholder="Your Name">
-            <input type="text" id="dish" placeholder="Dish Name">
-            <button onclick="addDish()">Add Dish</button>
-        </div>
-    </div>    
+</div>
 </body>
 </html>
