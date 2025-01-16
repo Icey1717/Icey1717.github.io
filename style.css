@@ -3,12 +3,6 @@ body {
     background-color: #f8f9fa;
     color: #333;
     text-align: center;
-    margin: 0; /* Remove default margin */
-    height: 100vh; /* Full viewport height */
-    display: flex; /* Enable Flexbox */
-    flex-direction: column; /* Stack content vertically */
-    justify-content: center; /* Center content vertically */
-    align-items: center; /* Center content horizontally */
 }
 
 h1, h2 {
@@ -57,17 +51,4 @@ button:hover {
     width: 100%;
     height: 80vh;
     overflow: hidden;
-}
-
-/* Center the dish entry section */
-#dish-entry {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
 }
