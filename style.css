@@ -2,11 +2,11 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f8f9fa;
     color: #333;
-    text-align: center;
-    margin: 0; /* Remove default margin */
-    height: 100vh; /* Full viewport height */
-    display: flex; /* Enable Flexbox */
-    flex-direction: column; /* Stack content vertically */
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
     justify-content: center; /* Center content vertically */
     align-items: center; /* Center content horizontally */
 }
@@ -48,27 +48,34 @@ button:hover {
     position: absolute; /* Allows random positioning */
 }
 
-/* Content section where dishes will float */
+/* Content section */
 #content {
-    display: flex; /* Enable Flexbox */
+    display: flex; /* Use Flexbox to align items */
     flex-direction: column;
-    justify-content: center; /* Center vertically */
-    align-items: center; /* Center horizontally */
-    width: 100%;
-    height: 100vh; /* Full viewport height */
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
     text-align: center;
+    width: 100%;
+    min-height: 100vh; /* Ensure full height of the viewport */
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
-/* Center the dish entry section, without a border */
+#content input, #content button {
+    width: 300px; /* Ensuring inputs and button are of uniform width */
+}
+
+/* Center the dish entry section */
 #dish-entry {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 20px;
-    margin-top: 20px;
     background-color: #fff;
     border-radius: 8px;
+    margin-top: 30px;
     box-shadow: none; /* Remove the box-shadow */
-    margin-top: 30px; /* Ensure it doesn't appear at the top */
+    width: 100%;
 }
