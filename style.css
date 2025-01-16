@@ -56,7 +56,7 @@ button:hover {
     align-items: center; /* Center content horizontally */
     text-align: center;
     width: 100%;
-    min-height: 100vh; /* Ensure full height of the viewport */
+    height: 100vh; /* Ensure full height of the viewport */
     position: absolute;
     top: 0;
     left: 0;
