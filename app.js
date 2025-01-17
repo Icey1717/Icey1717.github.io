@@ -38,6 +38,7 @@ const firebaseConfig = {
     
     const querySnapshot = await db.collection("eventInfo").get();
     querySnapshot.forEach((doc) => {
+        const event = doc.data();
         eventInfo.innerHTML += `<p>${event.eventName}</p>`;
         eventInfo.innerHTML += `<p><strong>Date:</strong> ${event.eventDate}</p>`;
         eventInfo.innerHTML += `<p><strong>Time:</strong> ${event.eventTime}</p>`;
