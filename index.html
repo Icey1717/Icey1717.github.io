@@ -4,212 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Potluck Planner</title>
+    <link rel="stylesheet" href="styles.css">
 
     <script src="https://www.gstatic.com/firebasejs/9.19.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.19.1/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.19.1/firebase-firestore-compat.js"></script>
-    <script>
-    // Your Firebase configuration
-    const firebaseConfig = {
-      apiKey: "AIzaSyD_aIUJup0_3t51O4S3jEMX3rxSGOW2oOA",
-      authDomain: "birthday-boy-e1605.firebaseapp.com",
-      projectId: "birthday-boy-e1605",
-      storageBucket: "birthday-boy-e1605.firebasestorage.app",
-      messagingSenderId: "32454068318",
-      appId: "1:32454068318:web:a849d3e6175719c348cccf"
-    };
-
-    // Initialize Firebase
-    const app = firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    const db = firebase.firestore();
-
-    // Check password and authenticate user
-    function checkPassword() {
-      const inputPassword = document.getElementById("password").value;
-
-      auth.signInWithEmailAndPassword("party@guest.com", inputPassword)
-        .then(() => {
-          // Password correct, show main content
-          document.getElementById("login").style.display = "none";
-          document.getElementById("content").style.display = "block";
-          loadPotluckData();
-        })
-        .catch(() => {
-          // Password incorrect, show error message
-          document.getElementById("error").textContent = "Incorrect password!";
-        });
-    }
-
-    // Fetch and display potluck data
-    async function loadPotluckData() {
-    const dishList = document.getElementById("dish-list");
-    dishList.innerHTML = ""; // Clear the list
-
-    const querySnapshot = await db.collection("dishes").get();
-    querySnapshot.forEach((doc) => {
-        const dish = doc.data();
-        const dishBox = document.createElement("div");
-        dishBox.classList.add("dish-box");
-        dishBox.textContent = `${dish.name} - ${dish.dish}`;
-
-        // Randomize initial position and velocity
-        dishBox.style.position = "absolute";
-        let xPos = Math.random() * window.innerWidth;
-        let yPos = Math.random() * window.innerHeight;
-
-        let speedMultiplier = 1;
-        let xVelocity = (Math.random() - 0.5) * speedMultiplier; // Random horizontal velocity (-1 to 1)
-        let yVelocity = (Math.random() - 0.5) * speedMultiplier; // Random vertical velocity (-1 to 1)
-
-        // Set initial position
-        dishBox.style.left = `${xPos}px`;
-        dishBox.style.top = `${yPos}px`;
-
-        // Append to the dish list container
-        dishList.appendChild(dishBox);
-
-        // Update position and check for bouncing
-        setInterval(() => {
-          // Update the position with velocity
-          xPos += xVelocity;
-          yPos += yVelocity;
-
-          // Check for wall collision and reverse velocity if necessary
-          if (xPos <= 0 || xPos >= window.innerWidth - dishBox.offsetWidth) {
-            xVelocity = -xVelocity; // Reverse horizontal direction
-          }
-          if (yPos <= 0 || yPos >= window.innerHeight - dishBox.offsetHeight) {
-            yVelocity = -yVelocity; // Reverse vertical direction
-          }
-
-          // Set new position
-          dishBox.style.left = `${xPos}px`;
-          dishBox.style.top = `${yPos}px`;
-
-        }, 8); // Update position roughly every frame (~60fps)
-    });
-}
-
-
-    // Add a new dish to Firestore
-    async function addDish() {
-      const name = document.getElementById("name").value;
-      const dish = document.getElementById("dish").value;
-
-      if (name && dish) {
-        await db.collection("dishes").add({ name, dish });
-        document.getElementById("name").value = "";
-        document.getElementById("dish").value = "";
-        loadPotluckData();
-      } else {
-        alert("Please fill out both fields.");
-      }
-    }
-  </script>
-  <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f8f9fa;
-        color: #333;
-        text-align: center;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-    }
-
-    h1, h2 {
-        color: #007bff;
-    }
-
-    input {
-        padding: 10px;
-        margin: 10px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-    }
-
-    button {
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    button:hover {
-        background-color: #0056b3;
-    }
-
-    /* Dish box styling */
-    .dish-box {
-        background-color: lightblue;
-        padding: 20px;
-        border: 1px solid #007BFF;
-        border-radius: 8px;
-        font-size: 16px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        text-align: center;
-        transition: transform 1s ease;
-        position: absolute;
-    }
-
-    /* Centering containers */
-    #login, #content, #dish-add {
-        text-align: center;
-        margin: auto;
-        position: absolute;
-    }
-
-    #login, #dish-add {
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    }
-
-    #content {
-        display: none;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-    }
-
-    #dish-list {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1; /* Send dish list to the background */
-        pointer-events: none; /* Prevent interactions with the floating dishes */
-    }
-</style>
-</head>
-<body>
-  <div id="login">
-    <h2>Enter Password</h2>
-    <input type="password" id="password" placeholder="Password">
-    <button onclick="checkPassword()">Submit</button>
-    <p id="error" style="color: red;"></p>
-  </div>
-
-  <div id="content">
-    <h2>Potluck Planner</h2>
-    <ul id="dish-list"></ul>
-
-    <div id="dish-add">
-      <h3>Add Your Dish</h3>
-      <input type="text" id="name" placeholder="Your Name">
-      <input type="text" id="dish" placeholder="Dish Name">
-      <button onclick="addDish()">Add Dish</button>
+    <script src= "app.js"></script>
+  </head>
+  <body>
+    <div id="login">
+      <h2>Enter Password</h2>
+      <input type="password" id="password" placeholder="Password">
+      <button onclick="checkPassword()">Submit</button>
+      <p id="error" style="color: red;"></p>
     </div>
-  </div>
-</body>
+
+    <div id="content">
+      <h2>Potluck Planner</h2>
+      <ul id="dish-list"></ul>
+
+      <div id="dish-add">
+        <h3>Add Your Dish</h3>
+        <input type="text" id="name" placeholder="Your Name">
+        <input type="text" id="dish" placeholder="Dish Name">
+        <button onclick="addDish()">Add Dish</button>
+      </div>
+    </div>
+  </body>
 </html>

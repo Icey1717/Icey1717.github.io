@@ -3,6 +3,11 @@ body {
     background-color: #f8f9fa;
     color: #333;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
 }
 
 h1, h2 {
@@ -39,16 +44,39 @@ button:hover {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
     transition: transform 1s ease;
-    position: absolute; /* Allows random positioning */
+    position: absolute;
 }
 
-/* Content section where dishes will float */
+/* Centering containers */
+#login, #content, #dish-add {
+    text-align: center;
+    margin: auto;
+    position: absolute;
+}
+
+#login, #dish-add {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
 #content {
     display: none;
-    text-align: center;
-    margin-top: 50px;
-    position: relative;
     width: 100%;
-    height: 80vh;
+    height: 100%;
     overflow: hidden;
+}
+
+#dish-list {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Send dish list to the background */
+    pointer-events: none; /* Prevent interactions with the floating dishes */
 }
