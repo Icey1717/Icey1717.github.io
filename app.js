@@ -32,14 +32,16 @@ const firebaseConfig = {
   }
 
   async function loadEventInfoData() {
-    const eventInfo = document.getElementById("event-details-list");
+    const eventInfo = document.getElementById("event-details");
     eventInfo.innerHTML = "<h3>Event Details</h3>";
     eventInfo.style.display = "block";
+
+    const eventInfoTitle = document.getElementById("event-details-title");
     
     const querySnapshot = await db.collection("eventInfo").get();
     querySnapshot.forEach((doc) => {
         const event = doc.data();
-        eventInfo.innerHTML += `<p>${event.eventName}</p>`;
+        eventInfoTitle.innerHTML += `<title>${event.eventName}</title>`;
         eventInfo.innerHTML += `<p><strong>Date:</strong> ${event.eventDate}</p>`;
         eventInfo.innerHTML += `<p><strong>Time:</strong> ${event.eventTime}</p>`;
         eventInfo.innerHTML += `<p><strong>Location:</strong> ${event.eventLocation}</p>`;
