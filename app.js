@@ -23,11 +23,27 @@ const firebaseConfig = {
         document.getElementById("login").style.display = "none";
         document.getElementById("content").style.display = "block";
         loadPotluckData();
+        loadEventInfoData();
       })
       .catch(() => {
         // Password incorrect, show error message
         document.getElementById("error").textContent = "Incorrect password!";
       });
+  }
+
+  async function loadEventInfoData() {
+    const eventInfo = document.getElementById("event-details-list");
+    eventInfo.innerHTML = ""; // Clear the list
+    eventInfo.style.display = "block";
+    eventInfo.textContent = "Event Details";
+    const querySnapshot = await db.collection("eventInfo").get();
+    querySnapshot.forEach((doc) => {
+        const event = doc.data();
+        const eventBox = document.createElement("div");
+        eventBox.classList.add("event-box");
+        eventBox.textContent = `${event.eventName} - ${event.eventDate} - ${event.eventTime} - ${event.eventLocation}`;
+        eventInfo.appendChild(eventBox);
+    });
   }
 
   // Fetch and display potluck data
