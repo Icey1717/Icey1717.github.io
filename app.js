@@ -116,3 +116,8 @@ const firebaseConfig = {
       alert("Please fill out both fields.");
     }
   }
+
+  function closeDishAdd() {
+    const dishAdd = document.getElementById('dish-add');
+    dishAdd.style.display = 'none';
+  }
