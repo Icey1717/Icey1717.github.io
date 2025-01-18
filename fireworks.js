@@ -13,7 +13,7 @@ function launchSingleFirework() {
 }
 
 function triggerFireworks() {
-    fireworks.updateSize({width: window.innerWidth - 100, height: window.innerHeight - 100});
+    fireworks.updateSize({width: window.innerWidth - 300, height: window.innerHeight - 300});
 
     let count = 50;
 
