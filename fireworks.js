@@ -6,7 +6,7 @@ const fireworks = new Fireworks.default(container, {
 fireworks.start()
 
 function launchSingleFirework() {
-    fireworks.updateSize({width: window.innerWidth - 300, height: window.innerHeight - 300});
+    fireworks.updateSize({width: window.innerWidth, height: window.innerHeight});
     fireworks.launch(1);
     setTimeout(() => {
         launchSingleFirework();
@@ -14,7 +14,7 @@ function launchSingleFirework() {
 }
 
 function triggerFireworks() {
-    fireworks.updateSize({width: window.innerWidth - 300, height: window.innerHeight - 300});
+    fireworks.updateSize({width: window.innerWidth, height: window.innerHeight});
 
     let count = 50;
 
