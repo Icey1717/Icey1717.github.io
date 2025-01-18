@@ -121,3 +121,6 @@ const firebaseConfig = {
     const dishAdd = document.getElementById('dish-add');
     dishAdd.style.display = 'none';
   }
+
+  // Add a fallback listener for touch events (optional)
+document.querySelector('.close-button').addEventListener('click', closeDishAdd);

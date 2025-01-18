@@ -88,10 +88,27 @@ button:hover {
     background: none;
     border: none;
     color: #555;
-    font-size: 20px;
+    font-size: 24px; /* Increase font size for better touch accessibility */
     cursor: pointer;
+    width: 40px; /* Add touch-friendly dimensions */
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%; /* Optional: circular touch target */
   }
   
   .close-button:hover {
     color: #d00;
+  }
+  
+  .close-button:active {
+    transform: scale(0.9); /* Optional: visual feedback */
+  }
+  
+  @media (max-width: 768px) {
+    .close-button {
+      top: 5px; /* Adjust spacing for smaller screens */
+      right: 5px;
+    }
   }
