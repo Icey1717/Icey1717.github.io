@@ -24,6 +24,7 @@ const firebaseConfig = {
         document.getElementById("content").style.display = "block";
         loadPotluckData();
         loadEventInfoData();
+        triggerFireworks();
       })
       .catch(() => {
         // Password incorrect, show error message
