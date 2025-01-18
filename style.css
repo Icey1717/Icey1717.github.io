@@ -99,7 +99,7 @@ button:hover {
   }
   
   .close-button:hover {
-    color: #d00;
+    background-color: #b30000;
   }
   
   .close-button:active {
