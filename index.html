@@ -37,7 +37,7 @@
       <ul id="dish-list"></ul>
 
       <div id="dish-add">
-        <button class="close-button" onclick="closeDishAdd()">×</button>
+        <button class="close-button" onclick="toggleDishAdd()">×</button>
         <h3>RSVP</h3>
         <p>Please enter your name to RSVP. Please also consider bringing some picnic food to share around!</p>
         <p>The food other people are bringing will bounce around the screen</p>
@@ -45,6 +45,8 @@
         <input type="text" id="dish" placeholder="Any Food">
         <button onclick="addDish()">Add Dish</button>
       </div>
+
+      <button id="toggle-button" onclick="toggleDishAdd()">Open RSVP</button>
     </div>
 
     <div class="fireworks" style="background-size: cover; background-position: 50% 50%; background-repeat: no-repeat;"></div>

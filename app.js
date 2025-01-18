@@ -117,9 +117,17 @@ const firebaseConfig = {
     }
   }
 
-  function closeDishAdd() {
+  function toggleDishAdd() {
     const dishAdd = document.getElementById('dish-add');
-    dishAdd.style.display = 'none';
+    const toggleButton = document.getElementById('toggle-button');
+  
+    if (dishAdd.style.display === 'none' || dishAdd.style.display === '') {
+      dishAdd.style.display = 'block'; // Show the section
+      toggleButton.style.display = 'none'; // Hide the button
+    } else {
+      dishAdd.style.display = 'none'; // Hide the section
+      toggleButton.style.display = 'block'; // Show the button
+    }
   }
 
   // Add a fallback listener for touch events (optional)
