@@ -5,6 +5,13 @@ const fireworks = new Fireworks.default(container, {
 });
 fireworks.start()
 
+function launchSingleFirework() {
+    fireworks.launch(1);
+    setTimeout(() => {
+        launchSingleFirework();
+    }, Math.random() * 4000 + 1000);
+}
+
 function triggerFireworks() {
     fireworks.updateSize({width: window.innerWidth - 300, height: window.innerHeight - 300});
 
@@ -16,7 +23,9 @@ function triggerFireworks() {
 
         if (count === 0) {
             clearInterval(interval);
-            fireworks.updateOptions({intensity: 1.00});
         }
     }, 50);
+
+    // launch a firework randomly every 1 - 5 seconds
+    launchSingleFirework();
 }
