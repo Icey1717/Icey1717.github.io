@@ -6,8 +6,8 @@ const fireworks = new Fireworks.default(container, {
 fireworks.start()
 
 function triggerFireworks() {
-    fireworks.updateSize({width: window.innerWidth, height: window.innerHeight});
-    fireworks.updateBoundaries({x: 0, y: 0, width: window.innerWidth, height: window.innerHeight});
+    //fireworks.updateSize({width: window.innerWidth, height: window.innerHeight});
+    //fireworks.updateBoundaries({x: 0, y: 0, width: window.innerWidth, height: window.innerHeight});
 
     let count = 50;
 
