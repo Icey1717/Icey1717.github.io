@@ -123,12 +123,13 @@ const firebaseConfig = {
   
     if (dishAdd.style.display === 'none' || dishAdd.style.display === '') {
       dishAdd.style.display = 'block'; // Show the section
-      toggleButton.style.display = 'none'; // Hide the button
+      toggleButton.style.visibility = 'hidden'; // Hide the button
     } else {
       dishAdd.style.display = 'none'; // Hide the section
-      toggleButton.style.display = 'block'; // Show the button
+      toggleButton.style.visibility = 'visible'; // Show the button
     }
   }
 
   // Add a fallback listener for touch events (optional)
-document.querySelector('.close-button').addEventListener('click', closeDishAdd);
+document.querySelector('.close-button').addEventListener('click', toggleDishAdd);
+document.querySelector('.toggle-button').addEventListener('click', toggleDishAdd);
