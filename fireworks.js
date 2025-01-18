@@ -7,7 +7,6 @@ fireworks.start()
 
 function triggerFireworks() {
     fireworks.updateSize({width: window.innerWidth - 300, height: window.innerHeight - 300});
-    //fireworks.updateBoundaries({x: 0, y: 0, width: window.innerWidth, height: window.innerHeight});
 
     let count = 50;
 
@@ -17,6 +16,7 @@ function triggerFireworks() {
 
         if (count === 0) {
             clearInterval(interval);
+            fireworks.updateOptions({intensity: 1.00});
         }
     }, 50);
 }
